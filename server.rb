@@ -9,15 +9,8 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 require 'webrick'
-require 'json'
-
-port = ENV['PORT'].nil? ? 3000 : ENV['PORT'].to_i
-
-puts "Server started: http://localhost:#{port}/"
 
 root = File.expand_path './blog'
-server = WEBrick::HTTPServer.new :Port => port, :DocumentRoot => root
-
-trap 'INT' do server.shutdown end
-
+server = WEBrick::HTTPServer.new :Port => 3000, :DocumentRoot => root
+trap('INT') { server.shutdown }
 server.start
